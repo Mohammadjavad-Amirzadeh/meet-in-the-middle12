@@ -1,0 +1,14 @@
+﻿  Source.c
+C:\Users\user\OneDrive\Desktop\New folder (2)\ConsoleApplication3\project\Source.c(956,76): warning C4020: 'al_draw_filled_circle': too many actual parameters
+C:\Users\user\OneDrive\Desktop\New folder (2)\ConsoleApplication3\project\Source.c(958,76): warning C4020: 'al_draw_filled_circle': too many actual parameters
+C:\Users\user\OneDrive\Desktop\New folder (2)\ConsoleApplication3\project\Source.c(1125,76): warning C4020: 'al_draw_filled_circle': too many actual parameters
+C:\Users\user\OneDrive\Desktop\New folder (2)\ConsoleApplication3\project\Source.c(1127,76): warning C4020: 'al_draw_filled_circle': too many actual parameters
+C:\Users\user\OneDrive\Desktop\New folder (2)\ConsoleApplication3\project\Source.c(1698,76): warning C4020: 'al_draw_filled_circle': too many actual parameters
+C:\Users\user\OneDrive\Desktop\New folder (2)\ConsoleApplication3\project\Source.c(1700,76): warning C4020: 'al_draw_filled_circle': too many actual parameters
+C:\Users\user\OneDrive\Desktop\New folder (2)\ConsoleApplication3\project\Source.c(2278,76): warning C4020: 'al_draw_filled_circle': too many actual parameters
+C:\Users\user\OneDrive\Desktop\New folder (2)\ConsoleApplication3\project\Source.c(2280,76): warning C4020: 'al_draw_filled_circle': too many actual parameters
+C:\Users\user\OneDrive\Desktop\New folder (2)\ConsoleApplication3\project\Source.c(2443,76): warning C4020: 'al_draw_filled_circle': too many actual parameters
+C:\Users\user\OneDrive\Desktop\New folder (2)\ConsoleApplication3\project\Source.c(2445,76): warning C4020: 'al_draw_filled_circle': too many actual parameters
+C:\Users\user\OneDrive\Desktop\New folder (2)\ConsoleApplication3\project\Source.c(2592,76): warning C4020: 'al_draw_filled_circle': too many actual parameters
+C:\Users\user\OneDrive\Desktop\New folder (2)\ConsoleApplication3\project\Source.c(2594,76): warning C4020: 'al_draw_filled_circle': too many actual parameters
+  ConsoleApplication3.vcxproj -> C:\Users\user\OneDrive\Desktop\New folder (2)\ConsoleApplication3\project\x64\Debug\ConsoleApplication3.exe
