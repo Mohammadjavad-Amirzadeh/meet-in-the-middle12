@@ -21,6 +21,7 @@
 #define board 1
 #define flip 10
 #define about_us 14
+#define rules 16
 #define exit_game 15
 #define win1 200
 #define win2 300
@@ -53,16 +54,16 @@ int check_mouse_position(button* btn, ALLEGRO_MOUSE_STATE* mouse) {
 
 int flipacoin() {
 	srand(time(0));
-	int a = rand() % 2;
-	if (a == 0) return 2;
-	else return a;
+		int a = rand() % 2 ;
+		if (a == 0) return 2;
+		else return a;
 }
 
 int tas_partab() {
 	srand(time(0));
-	int a = rand() % 6 - 3;
-	if (a == 0) return 3;
-	else return a;
+		int a = rand() % 6 - 3;
+		if (a == 0) return 3;
+		else return a;
 }
 
 
@@ -144,7 +145,7 @@ int main()
 	must_init(rahro, "rahro");
 	ALLEGRO_BITMAP* shans = al_load_bitmap("shans.png");
 	must_init(shans, "shans");
-
+    
 	ALLEGRO_BITMAP* close = al_load_bitmap("close door.png");
 	must_init(close, "close door");
 	ALLEGRO_BITMAP* zarib = al_load_bitmap("zarib.png");
@@ -157,6 +158,10 @@ int main()
 	ALLEGRO_BITMAP* menu = al_load_bitmap("menu.png");
 	must_init(menu, "OP");
 
+
+	ALLEGRO_BITMAP* rules_game = al_load_bitmap("rules.png");
+	must_init(rules_game, "rules");
+
 	ALLEGRO_BITMAP* win_1 = al_load_bitmap("win 1.png");
 	must_init(win_1, "win 1");
 	ALLEGRO_BITMAP* win_2 = al_load_bitmap("win 2.png");
@@ -164,8 +169,6 @@ int main()
 
 	ALLEGRO_BITMAP* menu_about = al_load_bitmap("about.png");
 	must_init(menu_about, "menu");
-	ALLEGRO_BITMAP* menu_rules = al_load_bitmap("Rules.png");
-	must_init(menu_rules, "Rules");
 
 
 	ALLEGRO_FONT* font1 = al_load_ttf_font("font1.ttf", 36, 0);
@@ -545,9 +548,15 @@ int main()
 	int sw_komaki_4;
 #pragma endregion
 
+#pragma region payan
+	int sw_payan1;
+	int sw_payan2;
+	int sw_payan3;
+	int sw_payan4;
+#pragma endregion
 
 	//printf("%d", flipacoin());
-
+	
 	bool swbtndown = false;
 	//int x = 675;
 	//int y = 550;
@@ -573,8 +582,8 @@ int main()
 		case ALLEGRO_EVENT_KEY_DOWN:
 			if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
 				return 0;
-			if (event.keyboard.keycode != ALLEGRO_KEY_ESCAPE)
-				break;
+                if(event.keyboard.keycode != ALLEGRO_KEY_ESCAPE)
+                    break;
 
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
 
@@ -605,78 +614,86 @@ int main()
 				/*---dokme start----*/
 				if (check_mouse_position(&start, &mouse)) {
 					al_set_system_mouse_cursor(disp, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
-					if (!swbtndown)
+					if (!swbtndown) 
 						if (al_mouse_button_down(&mouse, 1))
-						{
-							swbtndown = true;
-							startnewgame = fopen("startnewgame.txt", "rt");
-							if (!startnewgame) {
-								printf("cant open new game");
-								return 0;
-							}
-							int a;
-							fscanf_s(startnewgame, "%d", &a);
-							p1_1 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							p1_2 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							count_close1 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							count_zarib1 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							count_mamnoo1 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							count_againdice1 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							p2_1 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							p2_2 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							count_close2 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							count_zarib2 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							count_mamnoo2 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							count_againdice2 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							sw_k3 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							sw_k15 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							sw_k24 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							sw_k35 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							sw_k46 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							sw_k57 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							sw_k70 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							sw_k77 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							sw_asli_1 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							sw_asli_2 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							sw_asli_3 = (((a - 29) / 3) + 100) / 6521;
-							fscanf_s(startnewgame, "%d", &a);
-							sw_asli_4 = (((a - 29) / 3) + 100) / 6521;
-							fclose(startnewgame);
-							int F = flipacoin();
-							printf("\ncoin : %d", F);
-							if (F == 1) sw = player_1_befor;
-							if (F == 2) sw = player_2_befor;
-
-							ALLEGRO_AUDIO_STREAM* click1 = al_load_audio_stream("1.mp3", 2, 2048);
-							must_init(click1, "mouse_click_sfx");
-							al_set_audio_stream_playmode(click1, _ALLEGRO_PLAYMODE_STREAM_LOOP_ONCE);
-							al_attach_audio_stream_to_mixer(click1, al_get_default_mixer());
-
-							al_set_audio_stream_playmode(music, ALLEGRO_PLAYMODE_LOOP);
-							al_attach_audio_stream_to_mixer(music, al_get_default_mixer());
+					{
+						swbtndown = true;
+						startnewgame = fopen("startnewgame.txt", "rt");
+						if (!startnewgame) {
+							printf("cant open new game");
+							return 0;
 						}
+						int a;
+						fscanf_s(startnewgame, "%d", &a);
+						p1_1 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						p1_2 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						count_close1 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						count_zarib1 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						count_mamnoo1 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						count_againdice1 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						p2_1 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						p2_2 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						count_close2 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						count_zarib2 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						count_mamnoo2 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						count_againdice2 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_k3 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_k15 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_k24 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_k35 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_k46 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_k57 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_k70 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_k77 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_asli_1 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_asli_2 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_asli_3 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_asli_4 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_payan1 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_payan2 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_payan3 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startnewgame, "%d", &a);
+						sw_payan4 = (((a - 29) / 3) + 100) / 6521;
+						fclose(startnewgame);
+						int F = flipacoin();
+						printf("\ncoin : %d", F);
+						if (F == 1) sw = player_1_befor;
+						if (F == 2) sw = player_2_befor;
+
+						ALLEGRO_AUDIO_STREAM* click1 = al_load_audio_stream("1.mp3", 2, 2048);
+						must_init(click1, "mouse_click_sfx");
+						al_set_audio_stream_playmode(click1, _ALLEGRO_PLAYMODE_STREAM_LOOP_ONCE);
+						al_attach_audio_stream_to_mixer(click1, al_get_default_mixer());
+						
+						al_set_audio_stream_playmode(music, ALLEGRO_PLAYMODE_LOOP);
+						al_attach_audio_stream_to_mixer(music, al_get_default_mixer());
+					}
 					if (!al_mouse_button_down(&mouse, 1))  swbtndown = false;
 				}
 				else al_set_system_mouse_cursor(disp, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
@@ -684,7 +701,7 @@ int main()
 				/*-------------------*/
 
 				/*----dokme saves----*/
-				al_get_mouse_state(&mouse);
+			al_get_mouse_state(&mouse);
 				if (check_mouse_position(&saves, &mouse)) {
 					al_set_system_mouse_cursor(disp, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
 					if (!swbtndown) if (al_mouse_button_down(&mouse, 1))
@@ -756,6 +773,14 @@ int main()
 						sw_komaki_3 = (((a - 29) / 3) + 100) / 6521;
 						fscanf_s(startpreviuosgame, "%d", &a);
 						sw_komaki_4 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startpreviuosgame, "%d", &a);
+						sw_payan1 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startpreviuosgame, "%d", &a);
+						sw_payan2 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startpreviuosgame, "%d", &a);
+						sw_payan3 = (((a - 29) / 3) + 100) / 6521;
+						fscanf_s(startpreviuosgame, "%d", &a);
+						sw_payan4 = (((a - 29) / 3) + 100) / 6521;
 						fclose(startpreviuosgame);
 						//sw = player_1_befor;
 
@@ -778,7 +803,7 @@ int main()
 					if (!swbtndown) if (al_mouse_button_down(&mouse, 1))
 					{
 						swbtndown = true;
-						sw = flip;
+						sw = rules;
 
 						ALLEGRO_AUDIO_STREAM* click1 = al_load_audio_stream("1.mp3", 2, 2048);
 						must_init(click1, "mouse_click_sfx");
@@ -804,6 +829,8 @@ int main()
 						must_init(click1, "mouse_click_sfx");
 						al_set_audio_stream_playmode(click1, _ALLEGRO_PLAYMODE_STREAM_LOOP_ONCE);
 						al_attach_audio_stream_to_mixer(click1, al_get_default_mixer());
+						al_set_audio_stream_playmode(music, ALLEGRO_PLAYMODE_LOOP);
+						al_attach_audio_stream_to_mixer(music, al_get_default_mixer());
 					}
 					if (!al_mouse_button_down(&mouse, 1))  swbtndown = false;
 				}
@@ -817,17 +844,17 @@ int main()
 					{
 						swbtndown = true;
 						sw = exit_game;
-
+						
 						al_set_audio_stream_playmode(click, ALLEGRO_PLAYMODE_LOOP_ONCE);
 						al_attach_audio_stream_to_mixer(click, al_get_default_mixer());
 					}
 					if (!al_mouse_button_down(&mouse, 1))  swbtndown = false;
 				}
 				else al_set_system_mouse_cursor(disp, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
-
+				
 				break;
 
-			case about_us:
+			case about_us :
 				al_clear_to_color(al_map_rgb(0, 0, 0));
 				al_draw_bitmap(menu_about, 0, 0, 0);
 				al_get_mouse_state(&mouse);
@@ -849,29 +876,29 @@ int main()
 				else al_set_system_mouse_cursor(disp, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
 				al_draw_text(font_menu1, al_map_rgb(149, 11, 65), 1100, 650, 0, "exit");
 				break;
-			case flip:
+
+			case rules:
 				al_clear_to_color(al_map_rgb(0, 0, 0));
-				al_draw_bitmap(menu_rules, 0, 0, 0);
+				al_draw_bitmap(rules_game, 0, 0, 0);
 				al_get_mouse_state(&mouse);
-				if (check_mouse_position(&exitgame, &mouse)) {
+				if (check_mouse_position(&first, &mouse)) {
 					al_set_system_mouse_cursor(disp, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
 					if (!swbtndown) if (al_mouse_button_down(&mouse, 1))
 					{
 						swbtndown = true;
 						sw = first_menu;
 
+
 						ALLEGRO_AUDIO_STREAM* click1 = al_load_audio_stream("1.mp3", 2, 2048);
 						must_init(click1, "mouse_click_sfx");
 						al_set_audio_stream_playmode(click1, _ALLEGRO_PLAYMODE_STREAM_LOOP_ONCE);
 						al_attach_audio_stream_to_mixer(click1, al_get_default_mixer());
-						//al_destroy_audio_stream(click1);
 					}
 					if (!al_mouse_button_down(&mouse, 1))  swbtndown = false;
 				}
 				else al_set_system_mouse_cursor(disp, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
-				al_draw_text(font_menu1, al_map_rgb(149, 11, 65), 1100, 650, 0, "exit");
+				al_draw_text(font_menu1, al_map_rgb(124, 252, 0), 525, 650, 0, "menu");
 				break;
-
 
 			case exit_game:
 				return 0;
@@ -903,7 +930,7 @@ int main()
 
 
 			case player_1_befor:
-			lable1:
+				lable1:
 				al_clear_to_color(al_map_rgb(0, 0, 0));
 				sw1 = 0;
 				sw2 = 0;
@@ -1077,7 +1104,7 @@ int main()
 
 
 			case player_2_befor:
-			lable2:
+				lable2:
 				al_clear_to_color(al_map_rgb(0, 0, 0));
 				sw1 = 0;
 				sw2 = 0;
@@ -1092,7 +1119,7 @@ int main()
 					if (!swbtndown) if (al_mouse_button_down(&mouse, 1))
 					{
 						swbtndown = true;
-						i = tas_partab();
+					    i = tas_partab();
 						printf("\ntasssssssssss : %d", i);
 						ALLEGRO_AUDIO_STREAM* dicerolling = al_load_audio_stream("dice.mp3", 2, 2048);
 						must_init(dicerolling, "mouse_click_sfx");
@@ -1188,7 +1215,7 @@ int main()
 				al_draw_text(font3, al_map_rgb(23, 77, 239), 0, 450, 0, "click");
 				al_draw_text(font3, al_map_rgb(23, 77, 239), 0, 490, 0, "to roll");
 				al_draw_text(font3, al_map_rgb(23, 77, 239), 0, 530, 0, "the dice");
-
+				
 				/*al_draw_bitmap(tas1, 1050, 525, 0);
 				al_draw_bitmap(tas2, 1050, 525, 0);
 				al_draw_bitmap(tas3, 1050, 525, 0);
@@ -1315,7 +1342,7 @@ int main()
 				}
 				else al_set_system_mouse_cursor(disp, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
 				/*---------------------*/
-				/*dastoorat mahdoodiat*/
+                /*dastoorat mahdoodiat*/
 				al_get_mouse_state(&mouse);
 				if (check_mouse_position(&mamnoo2, &mouse)) {
 					al_set_system_mouse_cursor(disp, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
@@ -1377,6 +1404,10 @@ int main()
 						fprintf(startpreviuosgame, "%d\n", (((sw_komaki_2 * 6521) - 100) * 3) + 29);
 						fprintf(startpreviuosgame, "%d\n", (((sw_komaki_3 * 6521) - 100) * 3) + 29);
 						fprintf(startpreviuosgame, "%d\n", (((sw_komaki_4 * 6521) - 100) * 3) + 29);
+						fprintf(startpreviuosgame, "%d\n", (((sw_payan1 * 6521) - 100) * 3) + 29);
+						fprintf(startpreviuosgame, "%d\n", (((sw_payan2 * 6521) - 100) * 3) + 29);
+						fprintf(startpreviuosgame, "%d\n", (((sw_payan3 * 6521) - 100) * 3) + 29);
+						fprintf(startpreviuosgame, "%d\n", (((sw_payan4 * 6521) - 100) * 3) + 29);
 						fclose(startpreviuosgame);
 						ALLEGRO_AUDIO_STREAM* click1 = al_load_audio_stream("1.mp3", 2, 2048);
 						must_init(click1, "mouse_click_sfx");
@@ -1436,130 +1467,141 @@ int main()
 					{
 						swbtndown = true;
 						if (i == 3) sw_asli_1 = 1;
-						if (sw_asli_1 == 1) {
+						if (sw_asli_1 == 1 && sw_payan1==0) {
 
 
-							printf("\nfirst position of p1_1 : %d", p1_1);
-							printf("\ntas : %d", i);
+						printf("\nfirst position of p1_1 : %d", p1_1);
+						printf("\ntas : %d", i);
 
-							if (sw_komaki_1 == 1) {
+						if (sw_komaki_1 == 1) {
 
 
 
-								if (p1_1 + i > 0) {
-									p1_1 += (i);
-									printf("\nsecond position of p1_1 : %d", p1_1);
+							if (p1_1 + i > 0) {
+								p1_1 += (i);
+								printf("\nsecond position of p1_1 : %d", p1_1);
 
-									if (p1_1 == 5 && sw1 == 0) {
-										p1_1 = 38;
-										sw1 = 1;
-									}
-									if (p1_1 == 38 && sw1 == 0) {
-										p1_1 = 5;
-										sw1 = 1;
-									}
-									if (p1_1 == 21 && sw2 == 0) {
-										p1_1 = 65;
-										sw2 = 1;
-									}
-									if (p1_1 == 65 && sw2 == 0) {
-										p1_1 = 21;
-										sw2 = 1;
-									}
-									if (p1_1 == 25 && sw3 == 0) {
-										p1_1 = 58;
-										sw3 = 1;
-									}
-									if (p1_1 == 58 && sw3 == 0) {
-										p1_1 = 25;
-										sw3 = 1;
-									}
-									if (p1_1 == 42 && sw4 == 0) {
-										p1_1 = 75;
-										sw4 = 1;
-									}
-									if (p1_1 == 75 && sw4 == 0) {
-										p1_1 = 42;
-										sw4 = 1;
-									}
-
-									/*payan*/
-									if (p1_1 == 40) {
-										sw_asli_1 = 0;
-									}
-
-									if (p1_1 == 40 && p1_2 == 40) {
-										printf("skgjghskjghskljghlsjg");
-										al_destroy_audio_stream(music);
-										sw = win1;
-										goto lable4;
-									}
-									/*-----*/
-
-									/*barkhord ha*/
-									if (p1_1 == p2_1) {
-										p2_1 = 80;
-									}
-									if (p1_1 == p2_2) {
-										p2_2 = 80;
-									}
-									/*-----------*/
-
-									/*khoone haye shanse 3 & 77*/ /*close door*/
-									if (p1_1 == 3 && sw_k3 == 0) {
-										count_close1++;
-										sw_k3 = 1;
-									}
-
-									if (p1_1 == 77 && sw_k77 == 0) {
-										count_close1++;
-										sw_k77 = 1;
-									}
-									/*-----------------------------------------*/
-
-									/*khoone haye shans 35 & 46*/ /*zarib*/
-									if (p1_1 == 35 && sw_k15 == 0) {
-										count_zarib1++;
-										sw_k15 = 1;
-									}
-
-									if (p1_1 == 46 && sw_k46 == 0) {
-										count_zarib1++;
-										sw_k46 = 1;
-									}
-									/*-----------------------------------*/
-									/*khoone haye shans 24 & 57*/ /*tas mojadad*/
-									if (p1_1 == 24 && sw_k24 == 0) {
-										count_againdice1++;
-										sw_k24 = 1;
-									}
-
-									if (p1_1 == 57 && sw_k57 == 0) {
-										count_againdice1++;
-										sw_k57 = 1;
-									}
-									/*-----------------------------------------*/
-									/*khoone haye shans 15 & 70*/ /*mahdoodiat*/
-									if (p1_1 == 15 && sw_k15 == 0) {
-										count_mamnoo1++;
-										sw_k15 = 1;
-									}
-
-									if (p1_1 == 70 && sw_k70 == 0) {
-										count_mamnoo1++;
-										sw_k70 = 1;
-									}
-									/*-----------------------------------------*/
+								if (p1_1 == 5 && sw1 == 0) {
+									p1_1 = 38;
+									sw1 = 1;
 								}
-								else {
-									p1_1 = 0;
-									printf("\nsecond position of p1_1 : %d", p1_1);
+								if (p1_1 == 38 && sw1 == 0) {
+									p1_1 = 5;
+									sw1 = 1;
 								}
-								sw = player_2_befor;
+								if (p1_1 == 21 && sw2 == 0) {
+									p1_1 = 65;
+									sw2 = 1;
+								}
+								if (p1_1 == 65 && sw2 == 0) {
+									p1_1 = 21;
+									sw2 = 1;
+								}
+								if (p1_1 == 25 && sw3 == 0) {
+									p1_1 = 58;
+									sw3 = 1;
+								}
+								if (p1_1 == 58 && sw3 == 0) {
+									p1_1 = 25;
+									sw3 = 1;
+								}
+								if (p1_1 == 42 && sw4 == 0) {
+									p1_1 = 75;
+									sw4 = 1;
+								}
+								if (p1_1 == 75 && sw4 == 0) {
+									p1_1 = 42;
+									sw4 = 1;
+								}
+
+								/*payan*/
+								if (p1_1 == 40) {
+									sw_asli_1 = 0;
+									sw_payan1 = 1;
+								}
+
+								if (p1_1 == 40 && p1_2 == 40) {
+									printf("skgjghskjghskljghlsjg");
+									al_destroy_audio_stream(music);
+									sw = win1;
+									goto lable4;
+								}
+								/*-----*/
+
+								/*barkhord ha*/
+								if (p1_1 == p2_1) {
+									ALLEGRO_AUDIO_STREAM* brakhord = al_load_audio_stream("barkhord.mp3", 2, 2048);
+									must_init(brakhord, "brkhord");
+									al_set_audio_stream_playmode(brakhord, _ALLEGRO_PLAYMODE_STREAM_LOOP_ONCE);
+									al_attach_audio_stream_to_mixer(brakhord, al_get_default_mixer());
+									sw_payan3 = 0;
+									p2_1 = 80;
+								}
+								if (p1_1 == p2_2) {
+									ALLEGRO_AUDIO_STREAM* brakhord = al_load_audio_stream("barkhord.mp3", 2, 2048);
+									must_init(brakhord, "brkhord");
+									al_set_audio_stream_playmode(brakhord, _ALLEGRO_PLAYMODE_STREAM_LOOP_ONCE);
+									al_attach_audio_stream_to_mixer(brakhord, al_get_default_mixer());
+									sw_payan4 = 0;
+									p2_2 = 80;
+								}
+								/*-----------*/
+
+								/*khoone haye shanse 3 & 77*/ /*close door*/
+								if (p1_1 == 3 && sw_k3 == 0) {
+									count_close1++;
+									sw_k3 = 1;
+								}
+
+								if (p1_1 == 77 && sw_k77 == 0) {
+									count_close1++;
+									sw_k77 = 1;
+								}
+								/*-----------------------------------------*/
+
+								/*khoone haye shans 35 & 46*/ /*zarib*/
+								if (p1_1 == 35 && sw_k15 == 0) {
+									count_zarib1++;
+									sw_k15 = 1;
+								}
+
+								if (p1_1 == 46 && sw_k46 == 0) {
+									count_zarib1++;
+									sw_k46 = 1;
+								}
+								/*-----------------------------------*/
+								/*khoone haye shans 24 & 57*/ /*tas mojadad*/
+								if (p1_1 == 24 && sw_k24 == 0) {
+									count_againdice1++;
+									sw_k24 = 1;
+								}
+
+								if (p1_1 == 57 && sw_k57 == 0) {
+									count_againdice1++;
+									sw_k57 = 1;
+								}
+								/*-----------------------------------------*/
+								/*khoone haye shans 15 & 70*/ /*mahdoodiat*/
+								if (p1_1 == 15 && sw_k15 == 0) {
+									count_mamnoo1++;
+									sw_k15 = 1;
+								}
+
+								if (p1_1 == 70 && sw_k70 == 0) {
+									count_mamnoo1++;
+									sw_k70 = 1;
+								}
+								/*-----------------------------------------*/
 							}
-						}
-						else {
+							else {
+								p1_1 = 0;
+								printf("\nsecond position of p1_1 : %d", p1_1);
+							}
 							sw = player_2_befor;
+						}
+					}
+					else {//
+						sw = player_2_befor;
 						}
 						ALLEGRO_AUDIO_STREAM* click1 = al_load_audio_stream("1.mp3", 2, 2048);
 						must_init(click1, "mouse_click_sfx");
@@ -1580,7 +1622,7 @@ int main()
 						printf("\ntas : %d", i);
 						if (i == 3)sw_asli_2 = 1;
 
-						if (sw_asli_2 == 1) {
+						if (sw_asli_2 == 1 && sw_payan2 == 0) {
 
 
 
@@ -1627,6 +1669,7 @@ int main()
 									/*payan*/
 									if (p1_2 == 40) {
 										sw_asli_2 = 0;
+										sw_payan2 = 1;
 									}
 
 									if (p1_1 == 40 && p1_2 == 40) {
@@ -1639,9 +1682,19 @@ int main()
 
 									/*barkhord ha*/
 									if (p1_2 == p2_1) {
+										ALLEGRO_AUDIO_STREAM* brakhord = al_load_audio_stream("barkhord.mp3", 2, 2048);
+										must_init(brakhord, "brkhord");
+										al_set_audio_stream_playmode(brakhord, _ALLEGRO_PLAYMODE_STREAM_LOOP_ONCE);
+										al_attach_audio_stream_to_mixer(brakhord, al_get_default_mixer());
+										sw_payan3 = 0;
 										p2_1 = 80;
 									}
 									if (p1_2 == p2_2) {
+										ALLEGRO_AUDIO_STREAM* brakhord = al_load_audio_stream("barkhord.mp3", 2, 2048);
+										must_init(brakhord, "brkhord");
+										al_set_audio_stream_playmode(brakhord, _ALLEGRO_PLAYMODE_STREAM_LOOP_ONCE);
+										al_attach_audio_stream_to_mixer(brakhord, al_get_default_mixer());
+										sw_payan4 = 0;
 										p2_2 = 80;
 									}
 									/*-----------*/
@@ -1701,7 +1754,7 @@ int main()
 								sw = player_2_befor;
 							}
 						}
-						else {
+						else {//
 							sw = player_2_befor;
 						}
 						ALLEGRO_AUDIO_STREAM* click1 = al_load_audio_stream("1.mp3", 2, 2048);
@@ -1767,7 +1820,7 @@ int main()
 				if (count_zarib2 == 2)al_draw_text(font_game1, al_map_rgb(23, 77, 239), 1002, 240, 100, "2");
 				if (count_mamnoo2 == 2)al_draw_text(font_game1, al_map_rgb(23, 77, 239), 1002, 310, 100, "2");
 				if (count_againdice2 == 2)al_draw_text(font_game1, al_map_rgb(23, 77, 239), 1002, 375, 100, "2");
-
+				
 				if (i == 1)al_draw_bitmap(tas1, 1050, 525, 0);
 				if (i == 2) al_draw_bitmap(tas2, 1050, 525, 0);
 				if (i == 3)al_draw_bitmap(tas3, 1050, 525, 0);
@@ -1853,7 +1906,7 @@ int main()
 				}
 				else al_set_system_mouse_cursor(disp, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
 				/*---------------------*/
-				/*dastoorate  zarib*/
+			    /*dastoorate  zarib*/
 				al_get_mouse_state(&mouse);
 				if (check_mouse_position(&zarib2, &mouse)) {
 					al_set_system_mouse_cursor(disp, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
@@ -1957,6 +2010,10 @@ int main()
 						fprintf(startpreviuosgame, "%d\n", (((sw_komaki_2 * 6521) - 100) * 3) + 29);
 						fprintf(startpreviuosgame, "%d\n", (((sw_komaki_3 * 6521) - 100) * 3) + 29);
 						fprintf(startpreviuosgame, "%d\n", (((sw_komaki_4 * 6521) - 100) * 3) + 29);
+						fprintf(startpreviuosgame, "%d\n", (((sw_payan1 * 6521) - 100) * 3) + 29);
+						fprintf(startpreviuosgame, "%d\n", (((sw_payan2 * 6521) - 100) * 3) + 29);
+						fprintf(startpreviuosgame, "%d\n", (((sw_payan3 * 6521) - 100) * 3) + 29);
+						fprintf(startpreviuosgame, "%d\n", (((sw_payan4 * 6521) - 100) * 3) + 29);
 						fclose(startpreviuosgame);
 						ALLEGRO_AUDIO_STREAM* click1 = al_load_audio_stream("1.mp3", 2, 2048);
 						must_init(click1, "mouse_click_sfx");
@@ -2000,6 +2057,7 @@ int main()
 						must_init(click1, "mouse_click_sfx");
 						al_set_audio_stream_playmode(click1, _ALLEGRO_PLAYMODE_STREAM_LOOP_ONCE);
 						al_attach_audio_stream_to_mixer(click1, al_get_default_mixer());
+						//al_destroy_audio_stream(click1);
 
 						al_set_audio_stream_playmode(music, ALLEGRO_PLAYMODE_LOOP);
 						al_attach_audio_stream_to_mixer(music, al_get_default_mixer());
@@ -2026,7 +2084,7 @@ int main()
 						printf("\ntas : %d", i);
 
 						if (i == -3) sw_asli_3 = 1;
-						if (sw_asli_3 == 1) {
+						if (sw_asli_3 == 1 && sw_payan3 == 0) {
 
 
 							if (sw_komaki_3 == 1) {
@@ -2070,10 +2128,11 @@ int main()
 
 									/*payan*/
 									if (p2_1 == 40) {
+										sw_payan3 = 1;
 										sw_asli_3 = 0;
 									}
 
-									if (p2_1 == 40 && p2_1 == 40) {
+									if (p2_1 == 40 && p2_2 == 40) {
 										printf("skgjghskjghskljghlsjg");
 										al_destroy_audio_stream(music);
 										sw = win2;
@@ -2084,9 +2143,19 @@ int main()
 
 									/*barkhord ha*/
 									if (p2_1 == p1_1) {
+										ALLEGRO_AUDIO_STREAM* brakhord = al_load_audio_stream("barkhord.mp3", 2, 2048);
+										must_init(brakhord, "brkhord");
+										al_set_audio_stream_playmode(brakhord, _ALLEGRO_PLAYMODE_STREAM_LOOP_ONCE);
+										al_attach_audio_stream_to_mixer(brakhord, al_get_default_mixer());
+										sw_payan1 = 0;
 										p1_1 = 0;
 									}
 									if (p2_1 == p1_2) {
+										ALLEGRO_AUDIO_STREAM* brakhord = al_load_audio_stream("barkhord.mp3", 2, 2048);
+										must_init(brakhord, "brkhord");
+										al_set_audio_stream_playmode(brakhord, _ALLEGRO_PLAYMODE_STREAM_LOOP_ONCE);
+										al_attach_audio_stream_to_mixer(brakhord, al_get_default_mixer());
+										sw_payan2 = 0;
 										p1_2 = 0;
 									}
 									/*-----------*/
@@ -2145,7 +2214,7 @@ int main()
 							}
 						}
 						else
-						{
+						{//
 							sw = player_1_befor;
 						}
 						ALLEGRO_AUDIO_STREAM* click1 = al_load_audio_stream("1.mp3", 2, 2048);
@@ -2169,13 +2238,13 @@ int main()
 						if (i == -3) sw_asli_4 = 1;
 
 
-						if (sw_asli_4 == 1) {
+						if (sw_asli_4 == 1 && sw_payan4 == 0) {
 
 
 							if (sw_komaki_4 == 1) {
 
 
-								if (p2_2 + i < 80) {
+								if (p2_2 + i  < 80) {
 									p2_2 += (i);
 									printf("\nsecond position of p2_2 : %d", p2_2);
 									if (p2_2 == 5 && sw1 == 0) {
@@ -2213,10 +2282,11 @@ int main()
 
 									/*payan*/
 									if (p2_2 == 40) {
-										sw_asli_4 = 0;
+										sw_payan4 = 1;
+										//sw_asli_4 = 0;
 									}
 
-									if (p2_2 == 40 && p2_2 == 40) {
+									if (p2_2 == 40 && p2_1 == 40) {
 										printf("skgjghskjghskljghlsjg");
 										al_destroy_audio_stream(music);
 										sw = win2;
@@ -2226,9 +2296,19 @@ int main()
 
 									/*barkhord ha*/
 									if (p2_2 == p1_1) {
+										ALLEGRO_AUDIO_STREAM* brakhord = al_load_audio_stream("barkhord.mp3", 2, 2048);
+										must_init(brakhord, "brkhord");
+										al_set_audio_stream_playmode(brakhord, _ALLEGRO_PLAYMODE_STREAM_LOOP_ONCE);
+										al_attach_audio_stream_to_mixer(brakhord, al_get_default_mixer());
+										sw_payan1 = 0;
 										p1_1 = 0;
 									}
 									if (p2_2 == p1_2) {
+										ALLEGRO_AUDIO_STREAM* brakhord = al_load_audio_stream("barkhord.mp3", 2, 2048);
+										must_init(brakhord, "brkhord");
+										al_set_audio_stream_playmode(brakhord, _ALLEGRO_PLAYMODE_STREAM_LOOP_ONCE);
+										al_attach_audio_stream_to_mixer(brakhord, al_get_default_mixer());
+										sw_payan2 = 0;
 										p1_2 = 0;
 									}
 									/*-----------*/
@@ -2287,7 +2367,7 @@ int main()
 							}
 						}
 						else
-						{
+						{//
 							sw = player_1_befor;
 						}
 						ALLEGRO_AUDIO_STREAM* click1 = al_load_audio_stream("1.mp3", 2, 2048);
@@ -2421,7 +2501,7 @@ int main()
 
 
 
-			case player_1_mamnoo_kardan:
+            case player_1_mamnoo_kardan:
 				al_clear_to_color(al_map_rgb(0, 0, 0));
 
 				al_get_mouse_state(&mouse);
@@ -2683,8 +2763,8 @@ int main()
 				al_draw_bitmap(againdice, 1133, 360, 0);
 				break;
 
-			case win2:
-			lable3:
+		    case win2:
+				lable3:
 				al_clear_to_color(al_map_rgb(0, 0, 0));
 				//al_destroy_audio_stream(music);
 
@@ -2715,8 +2795,8 @@ int main()
 				al_draw_text(font_menu1, al_map_rgb(102, 51, 153), 1100, 650, 0, "exit");
 
 				break;
-			case win1:
-			lable4:
+            case win1:
+				lable4:
 				al_clear_to_color(al_map_rgb(0, 0, 0));
 				//al_destroy_audio_stream(music);
 
